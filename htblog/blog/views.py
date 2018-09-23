@@ -71,7 +71,6 @@ def post_publish(request, pk):
     return redirect('post_detail', pk=pk)
 
 
-
 @login_required
 def add_comment_to_post(request, pk):
 
@@ -82,6 +81,7 @@ def add_comment_to_post(request, pk):
         if form.is_valid():
             comment = form.save(commit=False)
             comment.post = post
+            comment.save()
             return redirect('post_detail', pk=post.pk)
     else:
         form = CommentForm()
